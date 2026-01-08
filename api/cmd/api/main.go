@@ -15,22 +15,43 @@ import (
 
 	"github.com/itam-misis/itam-api/internal/audit"
 	"github.com/itam-misis/itam-api/internal/auth"
+	"github.com/itam-misis/itam-api/internal/blog"
+	"github.com/itam-misis/itam-api/internal/cache"
+	"github.com/itam-misis/itam-api/internal/clubs"
 	"github.com/itam-misis/itam-api/internal/config"
 	"github.com/itam-misis/itam-api/internal/database"
+	"github.com/itam-misis/itam-api/internal/logs"
 	"github.com/itam-misis/itam-api/internal/middleware"
+	"github.com/itam-misis/itam-api/internal/news"
+	"github.com/itam-misis/itam-api/internal/partners"
+	"github.com/itam-misis/itam-api/internal/projects"
+	"github.com/itam-misis/itam-api/internal/stats"
+	"github.com/itam-misis/itam-api/internal/team"
+	"github.com/itam-misis/itam-api/internal/upload"
 	"github.com/itam-misis/itam-api/internal/users"
 	"github.com/itam-misis/itam-api/internal/wins"
 )
 
 type App struct {
-	config       *config.Config
-	db           *database.PostgresDB
-	redis        *database.RedisDB
-	router       *chi.Mux
-	authService  *auth.Service
-	usersService *users.Service
-	auditService *audit.Service
-	winsService  *wins.Service
+	config *config.Config
+	db     *database.PostgresDB
+	redis  *database.RedisDB
+	router *chi.Mux
+
+	// Services
+	authService     *auth.Service
+	usersService    *users.Service
+	auditService    *audit.Service
+	winsService     *wins.Service
+	projectsService *projects.Service
+	teamService     *team.Service
+	newsService     *news.Service
+	partnersService *partners.Service
+	clubsService    *clubs.Service
+	blogService     *blog.Service
+	statsService    *stats.Service
+	uploadService   *upload.Service
+	cacheService    *cache.Service
 }
 
 func main() {
@@ -68,20 +89,42 @@ func main() {
 	defer redisDB.Close()
 
 	// Initialize services
+	auditService := audit.NewService(db.Pool)
 	authService := auth.NewService(db.Pool, cfg.JWT.Secret, cfg.JWT.Expiry)
 	usersService := users.NewService(db.Pool)
-	auditService := audit.NewService(db.Pool)
 	winsService := wins.NewService(db.Pool, auditService)
+	projectsService := projects.NewService(db.Pool, auditService)
+	teamService := team.NewService(db.Pool, auditService)
+	newsService := news.NewService(db.Pool, auditService)
+	partnersService := partners.NewService(db.Pool, auditService)
+	clubsService := clubs.NewService(db.Pool, auditService)
+	blogService := blog.NewService(db.Pool, auditService)
+	statsService := stats.NewService(db.Pool, auditService)
+	uploadService := upload.NewService(upload.Config{
+		UploadPath: cfg.Upload.Path,
+		MaxSize:    cfg.Upload.MaxSize,
+		BaseURL:    "/uploads",
+	})
+	cacheService := cache.NewService(redisDB.Client)
 
 	// Initialize app
 	app := &App{
-		config:       cfg,
-		db:           db,
-		redis:        redisDB,
-		authService:  authService,
-		usersService: usersService,
-		auditService: auditService,
-		winsService:  winsService,
+		config:          cfg,
+		db:              db,
+		redis:           redisDB,
+		authService:     authService,
+		usersService:    usersService,
+		auditService:    auditService,
+		winsService:     winsService,
+		projectsService: projectsService,
+		teamService:     teamService,
+		newsService:     newsService,
+		partnersService: partnersService,
+		clubsService:    clubsService,
+		blogService:     blogService,
+		statsService:    statsService,
+		uploadService:   uploadService,
+		cacheService:    cacheService,
 	}
 
 	// Seed initial admin if needed
@@ -170,6 +213,15 @@ func (a *App) setupRouter() {
 	authHandler := auth.NewHandler(a.authService)
 	usersHandler := users.NewHandler(a.usersService)
 	winsHandler := wins.NewHandler(a.winsService)
+	projectsHandler := projects.NewHandler(a.projectsService)
+	teamHandler := team.NewHandler(a.teamService)
+	newsHandler := news.NewHandler(a.newsService)
+	partnersHandler := partners.NewHandler(a.partnersService)
+	clubsHandler := clubs.NewHandler(a.clubsService)
+	blogHandler := blog.NewHandler(a.blogService)
+	statsHandler := stats.NewHandler(a.statsService)
+	logsHandler := logs.NewHandler(a.auditService)
+	uploadHandler := upload.NewHandler(a.uploadService)
 
 	// Routes
 	r.Route("/api", func(r chi.Router) {
@@ -202,7 +254,7 @@ func (a *App) setupRouter() {
 				r.Delete("/{id}", usersHandler.Delete)
 			})
 
-			// Wins (authenticated users)
+			// Wins
 			r.Route("/wins", func(r chi.Router) {
 				r.Get("/", winsHandler.List)
 				r.Post("/", winsHandler.Create)
@@ -213,11 +265,96 @@ func (a *App) setupRouter() {
 				r.Put("/{id}", winsHandler.Update)
 				r.Delete("/{id}", winsHandler.Delete)
 			})
+
+			// Projects
+			r.Route("/projects", func(r chi.Router) {
+				r.Get("/", projectsHandler.List)
+				r.Post("/", projectsHandler.Create)
+				r.Get("/tags", projectsHandler.ListTags)
+				r.Put("/reorder", projectsHandler.Reorder)
+				r.Get("/{id}", projectsHandler.Get)
+				r.Put("/{id}", projectsHandler.Update)
+				r.Delete("/{id}", projectsHandler.Delete)
+			})
+
+			// Team
+			r.Route("/team", func(r chi.Router) {
+				r.Get("/", teamHandler.List)
+				r.Post("/", teamHandler.Create)
+				r.Get("/{id}", teamHandler.Get)
+				r.Put("/{id}", teamHandler.Update)
+				r.Delete("/{id}", teamHandler.Delete)
+			})
+
+			// News
+			r.Route("/news", func(r chi.Router) {
+				r.Get("/", newsHandler.List)
+				r.Post("/", newsHandler.Create)
+				r.Get("/{id}", newsHandler.Get)
+				r.Put("/{id}", newsHandler.Update)
+				r.Delete("/{id}", newsHandler.Delete)
+			})
+
+			// Partners
+			r.Route("/partners", func(r chi.Router) {
+				r.Get("/", partnersHandler.List)
+				r.Post("/", partnersHandler.Create)
+				r.Put("/reorder", partnersHandler.Reorder)
+				r.Get("/{id}", partnersHandler.Get)
+				r.Put("/{id}", partnersHandler.Update)
+				r.Delete("/{id}", partnersHandler.Delete)
+			})
+
+			// Clubs
+			r.Route("/clubs", func(r chi.Router) {
+				r.Get("/", clubsHandler.List)
+				r.Post("/", clubsHandler.Create)
+				r.Get("/{id}", clubsHandler.Get)
+				r.Put("/{id}", clubsHandler.Update)
+				r.Delete("/{id}", clubsHandler.Delete)
+			})
+
+			// Blog
+			r.Route("/blog", func(r chi.Router) {
+				r.Get("/", blogHandler.List)
+				r.Post("/", blogHandler.Create)
+				r.Get("/{id}", blogHandler.Get)
+				r.Put("/{id}", blogHandler.Update)
+				r.Delete("/{id}", blogHandler.Delete)
+			})
+
+			// Stats
+			r.Route("/stats", func(r chi.Router) {
+				r.Get("/", statsHandler.List)
+				r.Put("/{key}", statsHandler.Update)
+			})
+
+			// Logs (admin only)
+			r.Route("/logs", func(r chi.Router) {
+				r.Use(middleware.RequireAdmin)
+				r.Get("/", logsHandler.List)
+			})
+
+			// Upload
+			r.Route("/upload", func(r chi.Router) {
+				r.Post("/image", uploadHandler.UploadImage)
+				r.Post("/svg", uploadHandler.UploadSVG)
+				r.Delete("/{filename}", uploadHandler.Delete)
+			})
 		})
 
-		// Public API
+		// Public API (with caching)
 		r.Route("/public", func(r chi.Router) {
-			r.Get("/wins", winsHandler.ListPublic)
+			r.With(cache.Middleware(a.cacheService, cache.KeyPublicWins, cache.DefaultTTL)).Get("/wins", winsHandler.ListPublic)
+			r.With(cache.Middleware(a.cacheService, cache.KeyPublicProjects, cache.DefaultTTL)).Get("/projects", projectsHandler.ListPublic)
+			r.With(cache.Middleware(a.cacheService, cache.KeyPublicTeam, cache.DefaultTTL)).Get("/team", teamHandler.ListPublic)
+			r.With(cache.Middleware(a.cacheService, cache.KeyPublicNews, cache.DefaultTTL)).Get("/news", newsHandler.ListPublic)
+			r.With(cache.Middleware(a.cacheService, cache.KeyPublicPartners, cache.DefaultTTL)).Get("/partners", partnersHandler.ListPublic)
+			r.With(cache.Middleware(a.cacheService, cache.KeyPublicClubs, cache.DefaultTTL)).Get("/clubs", clubsHandler.ListPublic)
+			r.Get("/clubs/{slug}", clubsHandler.GetPublicBySlug)
+			r.With(cache.Middleware(a.cacheService, cache.KeyPublicBlog, cache.DefaultTTL)).Get("/blog", blogHandler.ListPublic)
+			r.Get("/blog/{slug}", blogHandler.GetPublicBySlug)
+			r.With(cache.Middleware(a.cacheService, cache.KeyPublicStats, cache.DefaultTTL)).Get("/stats", statsHandler.ListPublic)
 		})
 	})
 
