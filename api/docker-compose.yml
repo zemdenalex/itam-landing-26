@@ -80,6 +80,29 @@ services:
         condition: service_healthy
     networks:
       - itam-network
+      
+  # telegram-worker:
+  #   build:
+  #     context: ./telegram-worker
+  #     dockerfile: Dockerfile
+  #   container_name: itam-telegram
+  #   restart: unless-stopped
+  #   environment:
+  #     - TG_API_ID=${TG_API_ID}
+  #     - TG_API_HASH=${TG_API_HASH}
+  #     - TG_SESSION_STRING=${TG_SESSION_STRING}
+  #     - TG_CHANNEL_USERNAME=${TG_CHANNEL_USERNAME:-itatmisis}
+  #     - TG_UPDATE_INTERVAL=${TG_UPDATE_INTERVAL:-900}
+  #     - TG_POSTS_COUNT=${TG_POSTS_COUNT:-5}
+  #     - REDIS_URL=redis://redis:6379
+  #     - LOG_LEVEL=${TG_LOG_LEVEL:-INFO}
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
+  #   networks:
+  #     - itam-network
+  #   # Worker не имеет HTTP интерфейса - healthcheck через логи
+  #   # При 5 последовательных ошибках контейнер перезапустится
 
 volumes:
   postgres_data:
