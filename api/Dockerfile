@@ -7,14 +7,14 @@ WORKDIR /build
 RUN apk add --no-cache ca-certificates tzdata
 
 # Copy go mod files first for better caching
-COPY go.mod go.sum ./
-RUN go mod download
+COPY go.mod go.sum* ./
+RUN go mod download && go mod tidy
 
 # Copy source code
 COPY . .
 
-# Build binary
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
+# Ensure go.sum is up to date and build
+RUN go mod tidy && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     -ldflags="-w -s" \
     -o /build/api \
     ./cmd/api

@@ -47,13 +47,14 @@ docker-clean: ## Stop containers and remove volumes
 	docker compose down -v
 
 # Database Migrations (using golang-migrate)
-migrate-up: ## Run all up migrations
+# For Windows/without local migrate CLI - use docker commands below
+migrate-up: ## Run all up migrations (requires local migrate CLI)
 	migrate -path $(MIGRATE_PATH) -database "$(DB_DSN)" up
 
-migrate-down: ## Rollback last migration
+migrate-down: ## Rollback last migration (requires local migrate CLI)
 	migrate -path $(MIGRATE_PATH) -database "$(DB_DSN)" down 1
 
-migrate-down-all: ## Rollback all migrations
+migrate-down-all: ## Rollback all migrations (requires local migrate CLI)
 	migrate -path $(MIGRATE_PATH) -database "$(DB_DSN)" down
 
 migrate-create: ## Create a new migration (usage: make migrate-create name=create_users)
@@ -64,6 +65,16 @@ migrate-force: ## Force migration version (usage: make migrate-force version=1)
 
 migrate-version: ## Show current migration version
 	migrate -path $(MIGRATE_PATH) -database "$(DB_DSN)" version
+
+# Docker-based migrations (no local tools needed - RECOMMENDED for Windows)
+docker-migrate-up: ## Run migrations via Docker (recommended)
+	docker compose run --rm migrate
+
+docker-migrate-down: ## Rollback last migration via Docker
+	docker compose run --rm migrate -path /migrations -database "postgres://$(DB_USER):$(DB_PASSWORD)@postgres:5432/$(DB_NAME)?sslmode=disable" down 1
+
+docker-migrate-version: ## Show migration version via Docker
+	docker compose run --rm migrate -path /migrations -database "postgres://$(DB_USER):$(DB_PASSWORD)@postgres:5432/$(DB_NAME)?sslmode=disable" version
 
 # Dependencies
 deps: ## Download dependencies

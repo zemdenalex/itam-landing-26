@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   postgres:
     image: postgres:16-alpine
@@ -37,6 +35,20 @@ services:
       retries: 5
     networks:
       - itam-network
+
+  # Migration runner - use: docker compose run --rm migrate up
+  migrate:
+    image: migrate/migrate:v4.17.0
+    container_name: itam-migrate
+    profiles: ["tools"]
+    volumes:
+      - ./migrations:/migrations
+    networks:
+      - itam-network
+    command: ["-path", "/migrations", "-database", "postgres://${DB_USER:-itam}:${DB_PASSWORD}@postgres:5432/${DB_NAME:-itam}?sslmode=disable", "up"]
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   api:
     build:

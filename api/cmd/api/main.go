@@ -13,11 +13,13 @@ import (
 	"github.com/go-chi/chi/v5"
 	chimiddleware "github.com/go-chi/chi/v5/middleware"
 
+	"github.com/itam-misis/itam-api/internal/audit"
 	"github.com/itam-misis/itam-api/internal/auth"
 	"github.com/itam-misis/itam-api/internal/config"
 	"github.com/itam-misis/itam-api/internal/database"
 	"github.com/itam-misis/itam-api/internal/middleware"
 	"github.com/itam-misis/itam-api/internal/users"
+	"github.com/itam-misis/itam-api/internal/wins"
 )
 
 type App struct {
@@ -27,6 +29,8 @@ type App struct {
 	router       *chi.Mux
 	authService  *auth.Service
 	usersService *users.Service
+	auditService *audit.Service
+	winsService  *wins.Service
 }
 
 func main() {
@@ -66,6 +70,8 @@ func main() {
 	// Initialize services
 	authService := auth.NewService(db.Pool, cfg.JWT.Secret, cfg.JWT.Expiry)
 	usersService := users.NewService(db.Pool)
+	auditService := audit.NewService(db.Pool)
+	winsService := wins.NewService(db.Pool, auditService)
 
 	// Initialize app
 	app := &App{
@@ -74,6 +80,8 @@ func main() {
 		redis:        redisDB,
 		authService:  authService,
 		usersService: usersService,
+		auditService: auditService,
+		winsService:  winsService,
 	}
 
 	// Seed initial admin if needed
@@ -161,6 +169,7 @@ func (a *App) setupRouter() {
 	// Initialize handlers
 	authHandler := auth.NewHandler(a.authService)
 	usersHandler := users.NewHandler(a.usersService)
+	winsHandler := wins.NewHandler(a.winsService)
 
 	// Routes
 	r.Route("/api", func(r chi.Router) {
@@ -192,11 +201,23 @@ func (a *App) setupRouter() {
 				r.Put("/{id}", usersHandler.Update)
 				r.Delete("/{id}", usersHandler.Delete)
 			})
+
+			// Wins (authenticated users)
+			r.Route("/wins", func(r chi.Router) {
+				r.Get("/", winsHandler.List)
+				r.Post("/", winsHandler.Create)
+				r.Get("/years", winsHandler.GetYears)
+				r.Get("/stats", winsHandler.GetStats)
+				r.Post("/import", winsHandler.Import)
+				r.Get("/{id}", winsHandler.Get)
+				r.Put("/{id}", winsHandler.Update)
+				r.Delete("/{id}", winsHandler.Delete)
+			})
 		})
 
-		// Public API (will be added later)
+		// Public API
 		r.Route("/public", func(r chi.Router) {
-			// TODO: Add public endpoints
+			r.Get("/wins", winsHandler.ListPublic)
 		})
 	})
 
