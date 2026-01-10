@@ -1,0 +1,12 @@
+export { LoginPage } from './Login';
+export { DashboardPage } from './Dashboard';
+export { WinsPage } from './wins';
+export { ProjectsPage } from './projects';
+export { TeamPage } from './team';
+export { NewsPage } from './news';
+export { PartnersPage } from './partners';
+export { ClubsPage } from './clubs';
+export { BlogPage, BlogPostForm } from './blog';
+export { UsersPage } from './users';
+export { LogsPage } from './logs';
+export { TelegramPage } from './telegram';

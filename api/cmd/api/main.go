@@ -27,6 +27,7 @@ import (
 	"github.com/itam-misis/itam-api/internal/projects"
 	"github.com/itam-misis/itam-api/internal/stats"
 	"github.com/itam-misis/itam-api/internal/team"
+	"github.com/itam-misis/itam-api/internal/telegram"
 	"github.com/itam-misis/itam-api/internal/upload"
 	"github.com/itam-misis/itam-api/internal/users"
 	"github.com/itam-misis/itam-api/internal/wins"
@@ -52,6 +53,7 @@ type App struct {
 	statsService    *stats.Service
 	uploadService   *upload.Service
 	cacheService    *cache.Service
+	telegramService *telegram.Service
 }
 
 func main() {
@@ -106,6 +108,7 @@ func main() {
 		BaseURL:    "/uploads",
 	})
 	cacheService := cache.NewService(redisDB.Client)
+	telegramService := telegram.NewService(redisDB.Client)
 
 	// Initialize app
 	app := &App{
@@ -125,6 +128,7 @@ func main() {
 		statsService:    statsService,
 		uploadService:   uploadService,
 		cacheService:    cacheService,
+		telegramService: telegramService,
 	}
 
 	// Seed initial admin if needed
@@ -222,6 +226,7 @@ func (a *App) setupRouter() {
 	statsHandler := stats.NewHandler(a.statsService)
 	logsHandler := logs.NewHandler(a.auditService)
 	uploadHandler := upload.NewHandler(a.uploadService)
+	telegramHandler := telegram.NewHandler(a.telegramService)
 
 	// Routes
 	r.Route("/api", func(r chi.Router) {
@@ -341,6 +346,14 @@ func (a *App) setupRouter() {
 				r.Post("/svg", uploadHandler.UploadSVG)
 				r.Delete("/{filename}", uploadHandler.Delete)
 			})
+
+			// Telegram
+			r.Route("/telegram", func(r chi.Router) {
+				r.Get("/", telegramHandler.GetAll)
+				r.Get("/stats", telegramHandler.GetStats)
+				r.Get("/posts", telegramHandler.GetPosts)
+				r.With(middleware.RequireAdmin).Post("/refresh", telegramHandler.Refresh)
+			})
 		})
 
 		// Public API (with caching)
@@ -355,6 +368,7 @@ func (a *App) setupRouter() {
 			r.With(cache.Middleware(a.cacheService, cache.KeyPublicBlog, cache.DefaultTTL)).Get("/blog", blogHandler.ListPublic)
 			r.Get("/blog/{slug}", blogHandler.GetPublicBySlug)
 			r.With(cache.Middleware(a.cacheService, cache.KeyPublicStats, cache.DefaultTTL)).Get("/stats", statsHandler.ListPublic)
+			r.With(cache.Middleware(a.cacheService, "cache:public:telegram", 15*time.Minute)).Get("/telegram", telegramHandler.GetPublic)
 		})
 	})
 

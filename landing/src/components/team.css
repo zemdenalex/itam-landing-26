@@ -1,0 +1,177 @@
+@charset "utf-8";
+
+.team {
+    padding: 60px 0;
+}
+
+.team__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+}
+
+.team__headerRow {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 80px;
+}
+
+.team__header {
+    flex: 1 1 0;
+    height: 89px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.team__eyebrowRow {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.team__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: var(--text-secondary);
+}
+
+.team__eyebrow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 24px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 28.8px;
+}
+
+.team__title {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-primary);
+    font-size: 48px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: bold;
+    line-height: 57.6px;
+}
+
+.team__moreButton {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.3;
+    color: var(--black-main);
+    background-color: var(--white-main);
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.team__moreIcon {
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.2s ease;
+    color: var(--black-main);
+    fill: currentColor;
+}
+
+.team__moreButton:hover {
+    background-color: var(--white-600);
+}
+
+.team__moreButton:hover .team__moreIcon {
+    transform: rotate(-45deg);
+}
+
+.team__moreButton:active {
+    background-color: var(--bg-secondary-block);
+    color: var(--text-brand);
+}
+
+.team__moreButton:active .team__moreIcon {
+    color: var(--text-brand);
+}
+
+.team__carouselViewport {
+    width: 100%;
+    margin-top: 80px;
+    overflow: hidden;
+}
+
+.team__carouselRow {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    white-space: nowrap;
+    animation: team-carousel-marquee 40s linear infinite;
+}
+
+@keyframes team-carousel-marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.team__gridRow {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: nowrap;
+}
+
+.team__cardLarge {
+    width: 350px;
+    height: 350px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team__cardLargeImage {
+    width: 100%;
+    height: 350px;
+    border-radius: 24px;
+    background: var(--bg-tertiary-block);
+    object-fit: cover;
+}
+
+.team__cluster {
+    width: 352px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 28px;
+}
+
+.team__avatarWrapper {
+    height: 162px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team__avatar {
+    width: 162px;
+    height: 162px;
+    border-radius: 24px;
+    background: var(--bg-tertiary-block);
+    object-fit: cover;
+}

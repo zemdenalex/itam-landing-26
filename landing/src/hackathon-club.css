@@ -1,0 +1,430 @@
+@charset "utf-8";
+
+.hackClub {
+    padding-top: 120px;
+}
+
+.hackClub__hero {
+    position: relative;
+}
+
+.hackClub__heroImage {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 960px;
+    height: 975px;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.hackClub__heroContent {
+    position: relative;
+}
+
+.hackClub__heroInner {
+    padding-block: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.hackClub__title {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 96px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 115.2px;
+}
+
+.hackClub__buttonsRow {
+    display: inline-flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.hackClub__primaryButton {
+    height: 48px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    border: none;
+    background: var(--white-main);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.hackClub__primaryLabel {
+    max-width: 180px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary-inverse);
+    font-size: 16px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 20.8px;
+}
+
+.hackClub__primaryIcon {
+    width: 22px;
+    height: 8px;
+    background: var(--black-main, #0E0D0F);
+    transform: rotate(45deg);
+    transform-origin: top left;
+}
+
+.hackClub__statsRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+}
+
+.hackClub__statsCards {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.hackClub__statCard {
+    padding: 12px 20px;
+    border-radius: 16px;
+    background: #171618;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.hackClub__statNumber {
+    color: var(--text-primary);
+    font-size: 32px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 41.6px;
+}
+
+.hackClub__statLabel {
+    color: var(--text-secondary);
+    font-size: 24px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 31.2px;
+}
+
+.hackClub__markRow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hackClub__mark {
+    background: var(--icon-primary);
+    height: 20px;
+}
+
+.hackClub__mark--long {
+    width: 58px;
+}
+
+.hackClub__mark--mid {
+    width: 53px;
+}
+
+.hackClub__mark--short {
+    width: 17px;
+}
+
+.hackClub__section {
+    padding-block: 48px;
+}
+
+.hackClub__section--neutral {
+    background: var(--bg-secondary-block);
+}
+
+.hackClub__sectionInner {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+}
+
+.hackClub__sectionInner--column {
+    gap: 32px;
+}
+
+.hackClub__textBlock {
+    max-width: 1140px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.hackClub__sectionTitle {
+    margin: 0;
+    width: 550px;
+    color: var(--text-primary);
+    font-size: 32px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 38.4px;
+}
+
+.hackClub__text {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 24px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 28.8px;
+}
+
+.hackClub__imagesRow {
+    width: 100%;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.hackClub__imagesRow--wide {
+    justify-content: flex-start;
+}
+
+.hackClub__imageLarge {
+    width: 728px;
+    height: 410px;
+    border-radius: 32px;
+    object-fit: cover;
+}
+
+.hackClub__imageMedium {
+    flex: 1 1 0;
+    height: 273px;
+    border-radius: 32px;
+    object-fit: cover;
+}
+
+.hackClub__sectionHeading {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 48px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 57.6px;
+}
+
+.hackClub__projectsRow {
+    width: 100%;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 64px;
+}
+
+.hackClub__projectCard {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hackClub__projectImage {
+    width: 100%;
+    height: 413px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.hackClub__projectFooter {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.hackClub__projectInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hackClub__projectTitle {
+    margin: 0;
+    color: #ffffff;
+    font-size: 32px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 600;
+    line-height: 38.4px;
+}
+
+.hackClub__tagsRow {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.hackClub__tag {
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--brand-100);
+    color: var(--brand-alt-main);
+    font-size: 14px;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 500;
+    line-height: 19.6px;
+}
+
+.hackClub__projectIcon {
+    padding: 16px;
+    border-radius: 8px;
+    background: var(--bg-secondary-block);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hackClub__projectIconDot {
+    width: 20px;
+    height: 20px;
+    background: var(--icon-secondary);
+}
+
+.hackClub__teamGrid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.hackClub__teamRow {
+    width: 100%;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.hackClub__teamRow--small {
+    gap: 24px;
+}
+
+.hackClub__leaderCard {
+    padding: 24px;
+    border-radius: 24px;
+    background: #171618;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.hackClub__leaderAvatar {
+    width: 300px;
+    height: 300px;
+    border-radius: 24px;
+    object-fit: cover;
+}
+
+.hackClub__leaderText {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hackClub__leaderName {
+    color: var(--text-primary);
+    font-size: 24px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 31.2px;
+}
+
+.hackClub__leaderRole {
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 26px;
+}
+
+.hackClub__contactButton {
+    align-self: stretch;
+    height: 48px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    border: none;
+    background: var(--white-main);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.hackClub__contactLabel {
+    max-width: 180px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary-inverse);
+    font-size: 16px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 20.8px;
+}
+
+.hackClub__contactIcon {
+    width: 22px;
+    height: 8px;
+    background: var(--black-main, #0E0D0F);
+    transform: rotate(45deg);
+    transform-origin: top left;
+}
+
+.hackClub__memberCard {
+    width: 500px;
+    padding: 24px;
+    border-radius: 24px;
+    background: #171618;
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.hackClub__memberAvatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.hackClub__memberText {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hackClub__memberName {
+    color: var(--text-primary);
+    font-size: 24px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 31.2px;
+}
+
+.hackClub__memberRole {
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 26px;
+}
+

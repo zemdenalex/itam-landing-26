@@ -1,0 +1,132 @@
+.hero {
+    position: relative;
+    overflow: hidden;
+    margin-top: 85px;
+}
+
+.hero__bg {
+    position: absolute;
+    inset: 0;
+    rotate: 180deg;
+    background:
+        linear-gradient(rgba(255, 255, 255, .035) 3px, transparent 3px),
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 3px, transparent 3px);
+    background-size: 102px 108px;
+    opacity: .55;
+}
+
+.hero__video {
+    position: absolute;
+    top: 0;
+    right: 25%;
+    width: 50%;
+    height: 100%;
+    object-position: center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero__layout {
+    position: relative;
+    height: 761px;
+    padding: 80px 0;
+}
+
+.hero__title {
+    color: var(--text-primary);
+    font-weight: bold;
+    line-height: 1.05;
+    font-size: 96px;
+}
+
+.hero__title--misis {
+    margin: 0;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+}
+
+.hero__desc {
+    position: absolute;
+    right: 0;
+    bottom: 80px;
+    margin: 0;
+    max-width: 50%;
+    text-align: right;
+    font-size: 32px;
+    font-weight: normal;
+    line-height: 1.1;
+    color: var(--text-secondary);
+}
+
+.hero__more {
+    position: absolute;
+    left: 0;
+    bottom: 80px;
+    display: inline-flex;
+    text-decoration: none;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-weight: normal;
+    letter-spacing: .01em;
+    padding: 10px 0;
+    user-select: none;
+    transition: .2s ease;
+    animation: hero-more-bounce 1.6s ease-in-out infinite;
+}
+
+.hero__more:hover {
+    color: var(--text-primary);
+}
+
+@keyframes hero-more-bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.hero--misis {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+}
+
+.hero__moreIcon {
+    opacity: .75;
+    transform: translateY(-1px);
+    color: inherit;
+}
+
+.hero__moreIcon path {
+    fill: currentColor;
+}
+
+@media (max-width: 1280px) {
+    .hero__layout {
+        height: 640px;
+        padding: 64px 0;
+    }
+
+    .hero__title {
+        font-size: 80px;
+    }
+
+    .hero__desc {
+        font-size: 28px;
+        max-width: 55%;
+    }
+
+    .hero__video {
+        width: 48%;
+    }
+}

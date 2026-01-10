@@ -1,0 +1,28 @@
+# Docker Compose Override for Development
+# Copy to docker-compose.override.yml to use
+#
+# This file automatically merges with docker-compose.yml
+# Exposes database ports for direct access and other dev conveniences
+
+services:
+  postgres:
+    ports:
+      - "5432:5432"  # Access PostgreSQL directly
+
+  redis:
+    ports:
+      - "6379:6379"  # Access Redis directly
+
+  api:
+    ports:
+      - "8080:8080"  # API port
+    environment:
+      - LOG_LEVEL=debug
+    # Uncomment for live reload (requires air installed in container)
+    # volumes:
+    #   - ./api:/app
+    # command: air
+
+  # Disable nginx for development (use Vite dev servers instead)
+  nginx:
+    profiles: ["production"]

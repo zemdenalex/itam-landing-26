@@ -1,0 +1,60 @@
+// ИЗМЕНЕНИЯ В cmd/api/main.go ДЛЯ ИНТЕГРАЦИИ TELEGRAM МОДУЛЯ
+// ============================================================
+
+// 1. ДОБАВИТЬ ИМПОРТ (в блок import):
+// ------------------------------------------------------------
+import (
+	// ... существующие импорты ...
+	"github.com/itam-misis/itam-api/internal/telegram"  // ДОБАВИТЬ ЭТУ СТРОКУ
+)
+
+
+// 2. ДОБАВИТЬ СЕРВИС В СТРУКТУРУ App:
+// ------------------------------------------------------------
+type App struct {
+	// ... существующие поля ...
+	telegramService *telegram.Service  // ДОБАВИТЬ ЭТУ СТРОКУ
+}
+
+
+// 3. ИНИЦИАЛИЗИРОВАТЬ СЕРВИС В main() (после создания cacheService):
+// ------------------------------------------------------------
+// После строки:
+//     cacheService := cache.NewService(redisDB.Client)
+// Добавить:
+telegramService := telegram.NewService(redisDB.Client)
+
+
+// 4. ДОБАВИТЬ В СТРУКТУРУ App (после cacheService):
+// ------------------------------------------------------------
+app := &App{
+	// ... существующие поля ...
+	telegramService: telegramService,  // ДОБАВИТЬ ЭТУ СТРОКУ
+}
+
+
+// 5. ДОБАВИТЬ ОБРАБОТЧИК В setupRouter() (в начале функции, после других handlers):
+// ------------------------------------------------------------
+// После строки:
+//     uploadHandler := upload.NewHandler(a.uploadService)
+// Добавить:
+telegramHandler := telegram.NewHandler(a.telegramService)
+
+
+// 6. ДОБАВИТЬ РОУТЫ В PROTECTED СЕКЦИЮ (внутри protected group):
+// ------------------------------------------------------------
+// Добавить в блок r.Group(func(r chi.Router) { r.Use(middleware.Auth(a.authService)) ... }):
+
+// Telegram (статистика канала)
+r.Route("/telegram", func(r chi.Router) {
+	r.Get("/", telegramHandler.GetAll)
+	r.Get("/stats", telegramHandler.GetStats)
+	r.Get("/posts", telegramHandler.GetPosts)
+	r.With(middleware.RequireAdmin).Post("/refresh", telegramHandler.Refresh)
+})
+
+
+// 7. ДОБАВИТЬ PUBLIC ENDPOINT (в /api/public секцию):
+// ------------------------------------------------------------
+// Добавить после других public endpoints:
+r.With(cache.Middleware(a.cacheService, "cache:public:telegram", 15*time.Minute)).Get("/telegram", telegramHandler.GetPublic)

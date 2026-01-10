@@ -1,0 +1,102 @@
+:root {
+  --text-secondary: rgba(250, 250, 250, 0.6);
+  --text-primary: #FAFAFA;
+  --text-primary-inverse: #0E0D0F;
+  --text-brand: #8174E2;
+  --white-400: rgba(250, 250, 250, 0.4);
+  --white-600: rgba(250, 250, 250, 0.88);
+  --white-main: #FAFAFA;
+  --bg-tertiary-block: rgba(250, 250, 250, 0.09);
+  --bg-secondary-block: #171618;
+  --bg-primary: rgba(14, 13, 15, 1);
+  --brand-100: rgba(93, 75, 220, 0.05);
+  --brand-alt-main: rgba(129, 116, 226, 1);
+  --icon-secondary: rgba(250, 250, 250, 0.4);
+  --icon-primary: rgba(250, 250, 250, 0.88);
+  --black-100: rgba(14, 13, 15, 0.06);
+  --controls-buttons-ghost-hover: rgba(129, 116, 226, 0.04);
+  --controls-buttons-ghost-press: rgba(129, 116, 226, 0.09);
+}
+
+@font-face {
+  font-family: 'NTSomic';
+  src: url('/fonts/NTSomic/NTSomic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NTSomic';
+  src: url('/fonts/NTSomic/NTSomic-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NTSomic';
+  src: url('/fonts/NTSomic/NTSomic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+  padding: 0;
+  background-color: var(--bg-primary);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+::selection {
+  background: var(--brand-alt-main);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background: var(--brand-alt-main);
+  color: var(--text-primary);
+}
+
+.container {
+  max-width: 1520px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1200px;
+    padding-inline: 60px;
+  }
+}
+
+/* Loading states */
+.achievements__loading,
+.projects__loading,
+.news__loading,
+.clubs__loading {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* Smooth fade in for loaded content */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}

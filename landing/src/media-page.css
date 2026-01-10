@@ -1,0 +1,184 @@
+@charset "utf-8";
+
+.mediaPage {
+    padding: 192px 0 80px;
+}
+
+.mediaPage__container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.mediaPage__heroRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 80px;
+}
+
+.mediaPage__hero {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.mediaPage__title {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 96px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: bold;
+    line-height: 115.2px;
+}
+
+.mediaPage__filters {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mediaPage__filter {
+    height: 48px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 20.8px;
+    cursor: default;
+    transition: all 0.2s ease-out;
+}
+
+.mediaPage__filter--active {
+    background: var(--white-main);
+    color: var(--text-primary-inverse);
+}
+
+.mediaPage__filter:hover {
+    background: var(--controls-buttons-ghost-hover);
+}
+
+.mediaPage__filter:active {
+    background: var(--controls-buttons-ghost-press);
+}
+
+.mediaPage__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.mediaPage__divider {
+    width: 100%;
+    height: 0;
+    border-top: 1px solid #505050;
+}
+
+.mediaPage__item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.mediaPage__row {
+    width: 100%;
+    display: inline-flex;
+    gap: 72px;
+}
+
+.mediaPage__date {
+    width: 150px;
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+.mediaPage__content {
+    display: flex;
+    gap: 32px;
+}
+
+.mediaPage__image {
+    width: 565px;
+    height: 320px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.mediaPage__textColumn {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.mediaPage__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.mediaPage__badge {
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--bg-secondary-block);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mediaPage__badgeLabel {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 500;
+    line-height: 19.6px;
+}
+
+.mediaPage__headline {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 24px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 500;
+    line-height: 33.6px;
+}
+
+.mediaPage__readMore {
+    padding: 12px 20px;
+    border-radius: 16px;
+    background: var(--white-main);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+}
+
+.mediaPage__readMoreLabel {
+    max-width: 180px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary-inverse);
+    font-size: 16px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 20.8px;
+}
+
+.mediaPage__readMoreIcon {
+    width: 22px;
+    height: 22px;
+}

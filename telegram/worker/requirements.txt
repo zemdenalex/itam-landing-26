@@ -1,0 +1,8 @@
+# Telegram API client (MTProto)
+telethon==1.36.0
+
+# Redis async client
+redis[hiredis]==5.0.1
+
+# Type hints support
+typing-extensions>=4.0.0

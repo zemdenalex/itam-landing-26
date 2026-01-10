@@ -1,0 +1,300 @@
+@charset "utf-8";
+
+.header {
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: var(--black-100);
+    color: var(--text-secondary);
+    backdrop-filter: blur(50px);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: all 0.5s ease;
+}
+
+.header a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.header__inner {
+    display: flex;
+    height: 85px;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.5s ease;
+}
+
+.header__disabled {
+    height: 85px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.header__active {
+    height: 531px;
+    transition: all 0.5s ease;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand__mark {
+    width: 100px;
+    height: 31px;
+}
+
+.brand__text {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .06em;
+}
+
+.nav {
+    display: none;
+    gap: 50px;
+    font-size: 20px;
+}
+
+.nav__link:hover {
+    color: var(--text-primary);
+}
+
+.nav {
+    display: flex;
+}
+
+.header__menu {
+    display: inline-flex;
+    width: 60px;
+    height: 60px;
+    padding: 10px 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 7px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    border: none;
+    background: transparent;
+    transition: all 0.5s ease;
+}
+
+.header__menu:hover {
+    background: var(--bg-secondary-block);
+}
+
+.header__menu1line {
+    width: 30px;
+    height: 1px;
+    background: var(--white-main);
+    transition: all 0.5s ease;
+}
+
+.header__menu:hover .header__menu1line {
+    transform: translateY(19px);
+}
+
+.header__active .header__menu1line {
+    transform: translateY(8px);
+}
+
+.header__active:hover .header__menu1line {
+    transform: translateY(8px);
+}
+
+.header__menu2line {
+    width: 30px;
+    height: 2px;
+    background: var(--white-main);
+}
+
+.header__menu3line {
+    width: 30px;
+    height: 3px;
+    background: var(--white-main);
+    transition: all 0.5s ease;
+}
+
+.header__menu:hover .header__menu3line {
+    transform: translateY(-19px);
+}
+
+.header__active .header__menu3line {
+    transform: translateY(-9px);
+    height: 2px;
+}
+
+.header__active:hover .header__menu3line {
+    transform: translateY(-9px);
+    height: 2px;
+}
+
+.header__menuPanel {
+    width: 100%;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 80px;
+    transition: all 0.5s ease;
+}
+
+/* .header__disabled .header__menuPanel {
+    transform: translateY(calc(-100% - 85px));
+
+}
+
+.header__active .header__menuPanel {
+    transform: translateY(0);
+} */
+
+.header__menuColumn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header__menuColumn--main {
+    align-self: stretch;
+    justify-content: space-between;
+}
+
+.header__menuItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header__menuItemDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: var(--text-primary);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.7s ease;
+}
+
+.header__menuItemLabel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    color: var(--text-secondary);
+    font-size: 32px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: normal;
+    line-height: 38.4px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.7s ease;
+}
+
+.header__menuItem--active .header__menuItemDot {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.header__disabled .header__menuItemDot {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.header__menuItemLabel:hover {
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.header__active .header__menuItemLabel {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.header__active .header__menuItem--active .header__menuItemDot {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.header__menuItem--active .header__menuItemLabel {
+    color: var(--text-primary);
+    cursor: default;
+}
+
+.header__menuColumn--clubs {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    padding-right: 200px;
+}
+
+.header__menuSectionTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    color: var(--text-primary);
+    font-size: 32px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 600;
+    line-height: 38.4px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.7s ease;
+}
+
+.header__active .header__menuSectionTitle {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+
+.header__submenuItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header__submenuDot {
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background: var(--text-secondary);
+    opacity: 0;
+}
+
+.header__submenuLabel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: normal;
+    line-height: 24px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.7s ease;
+}
+
+.header__submenuLabel:hover {
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.header__active .header__submenuLabel {
+    opacity: 1;
+    transform: translateY(0px);
+}

@@ -1,0 +1,264 @@
+@charset "utf-8";
+
+.achievements {
+    padding: 60px 0px;
+}
+
+.achievements__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.achievements__header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-start;
+}
+
+.achievements__eyebrowRow {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.achievements__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: var(--text-secondary);
+}
+
+.achievements__eyebrow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 24px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 28.8px;
+}
+
+.achievements__title {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-primary);
+    font-size: 48px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: bold;
+    line-height: 57.6px;
+}
+
+.achievements__content {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+}
+
+.achievements__lead {
+    color: var(--text-secondary);
+    font-size: 32px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 44.8px;
+}
+
+.achievements__stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.achievements__statCard {
+    width: 400px;
+    padding-inline: 32px;
+    border-radius: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+}
+
+.achievements__statNumber {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-primary);
+    font-size: 32px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    line-height: 38.4px;
+}
+
+.achievements__statText {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: normal;
+    line-height: 26px;
+}
+
+.achievements__statsDivider {
+    width: 1px;
+    height: 132px;
+    align-self: stretch;
+    background-color: #505050;
+}
+
+.achievements__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+.achievements__listHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+.achievements__listTitle {
+    margin: 0;
+    color: var(--white-main);
+    font-size: 32px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    line-height: 38.4px;
+}
+
+.achievements__listTable {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.achievements__listSeparator {
+    width: 100%;
+    height: 0;
+    border-top: 1px solid #505050;
+}
+
+.achievements__listRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 1s ease;
+    padding: 16px 0;
+}
+
+.achievements__listRowContainer {
+    transition: all 1s ease;
+}
+
+.achievements__listRowContainer:hover {
+
+    background: var(--brand-alt-main);
+
+    transition: all 0.2s ease;
+}
+
+.achievements__listRow:hover .achievements__listCell {
+    color: var(--text-primary);
+}
+
+.achievements__listCell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: normal;
+    line-height: 24px;
+}
+
+.achievements__listCell--event {
+    width: 470px;
+}
+
+.achievements__listCell--team {
+    width: 400px;
+}
+
+.achievements__listCell--place {
+    width: auto;
+    color: var(--text-primary);
+}
+
+.achievements__more {
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.achievements__moreRow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--white-400);
+    transition: all 0.3s ease;
+}
+
+.achievements__moreLabel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--white-400);
+    font-size: 24px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: normal;
+    line-height: 28.8px;
+    transition: all 0.3s ease;
+}
+
+.achievements__moreSquare {
+    width: 20px;
+    height: 20px;
+}
+
+.achievements__moreIcon {
+    width: 20px;
+    height: 20px;
+    fill: var(--white-400);
+    transform: rotate(-45deg);
+    transition: all 0.3s ease;
+}
+
+.achievements__listRowContainer--clickable {
+    cursor: pointer;
+}
+
+.achievements__more:hover .achievements__moreIcon {
+    fill: var(--white-main);
+    transform: rotate(0deg);
+}
+
+.achievements__more:hover .achievements__moreLabel {
+    cursor: pointer;
+    color: var(--white-main);
+}
+
+.achievements__more:hover .achievements__moreRow {
+    cursor: pointer;
+    border-bottom: 1px solid var(--white-main);
+}

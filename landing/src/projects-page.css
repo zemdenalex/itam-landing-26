@@ -1,0 +1,144 @@
+@charset "utf-8";
+
+.projectsPage {
+    padding: 192px 0 80px;
+}
+
+.projectsPage__container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.projectsPage__hero {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.projectsPage__title {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 96px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: bold;
+    line-height: 115.2px;
+}
+
+.projectsPage__filters {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.projectsPage__filter {
+    height: 48px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 20.8px;
+    cursor: pointer;
+}
+
+.projectsPage__filter:hover {
+    background: var(--controls-buttons-ghost-hover);
+}
+
+.projectsPage__filter:active {
+    background: var(--controls-buttons-ghost-press);
+}
+
+.projectsPage__filter--active {
+    background: var(--white-main);
+    color: var(--text-primary-inverse);
+}
+
+.projectsPage__divider {
+    width: 100%;
+    height: 0;
+    border-top: 1px solid #505050;
+}
+
+.projectsPage__grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+}
+
+.projectsPage__card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.projectsPage__image {
+    width: 100%;
+    height: 410px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.projectsPage__cardFooter {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.projectsPage__cardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.projectsPage__cardTitle {
+    margin: 0;
+    color: #ffffff;
+    font-size: 32px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 600;
+    line-height: 38.4px;
+}
+
+.projectsPage__tags {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.projectsPage__tag {
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--brand-100);
+    color: var(--brand-alt-main);
+    font-size: 14px;
+    font-family: 'NTSomic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 500;
+    line-height: 19.6px;
+}
+
+.projectsPage__iconButton {
+    padding: 16px;
+    border-radius: 8px;
+    background: var(--bg-secondary-block);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.achievements__Icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--white-400);
+    transform: rotate(-45deg);
+    transition: all 0.3s ease;
+}
